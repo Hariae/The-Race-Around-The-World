@@ -7,13 +7,10 @@ class Main extends Component {
         this.state = {
             toggle: false,
             geolocationError: false,
-            //currentLatitude : 0,
-            //currentLongitude:0,
             history: []
         }
         //bind
-        this.toggle = this.toggle.bind(this);
-        //this.deleteEntry = this.deleteEntry.bind(this);
+        this.toggle = this.toggle.bind(this);        
     }
 
     toggle = (event) => {
@@ -21,11 +18,7 @@ class Main extends Component {
         const target = event.target;
         const id = target.id;
         var latitude, longitude;
-
         var startTime, endTime;
-
-        
-
 
         function error() {
             this.setState({
@@ -84,9 +77,7 @@ class Main extends Component {
                 item.endLatitude = position.coords.latitude;
                 item.endLongitude = position.coords.longitude;
                 item.timeElapsed = endTime.getSeconds() - new Date(item.startTime).getSeconds();
-                
-                
-                
+                                
                 var historyList = currentHistoryArray;
                 historyList.push(item);
                 
@@ -100,8 +91,6 @@ class Main extends Component {
 
         }
 
-
-
         this.setState({
             toggle: !this.state.toggle
         });
@@ -109,8 +98,6 @@ class Main extends Component {
 
 
     deleteEntry = (Parameter, event) =>{
-        const target = event.target;
-        //const id = target.id;
 
         var currentHistory = localStorage.getItem('historyTable');
         var currentHistoryArray = JSON.parse(currentHistory);
@@ -120,14 +107,11 @@ class Main extends Component {
         this.setState({
             deleted: true
         });
-        
-        
+                
         console.log(currentHistoryArray);
     }
 
     render() {
-
-        
 
         let error = null;
 
@@ -136,6 +120,7 @@ class Main extends Component {
                 <strong>Error in retrieving Geo location details!</strong>
             </div>;
         }
+
         var historyTableContent = localStorage.getItem('historyTable');
         let historyTable = null;
         if(historyTableContent != null){
@@ -158,7 +143,6 @@ class Main extends Component {
             });
         }
         
-
         return (
             <div>
                 <div className="header container center-content">
